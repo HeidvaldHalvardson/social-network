@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/229.fe40172e.chunk.js","mappings":"iJAUA,UARc,SAACA,GACb,OACE,uCAIH,C","sources":["components/pages/Music/Music.jsx"],"sourcesContent":["import React from \"react\";\r\n\r\nconst Music = (props) => {\r\n  return (\r\n    <>\r\n      Music\r\n    </>\r\n  )\r\n}\r\n\r\nexport default Music;"],"names":["props"],"sourceRoot":""}
