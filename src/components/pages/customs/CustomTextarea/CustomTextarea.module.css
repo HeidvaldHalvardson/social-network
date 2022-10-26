@@ -1,0 +1,12 @@
+.fieldControl {
+  width: 300px;
+  height: 30px;
+}
+
+.fieldControl.fieldError {
+  border: 3px solid red;
+}
+
+.fieldControl.fieldError:focus {
+  outline-color: red;
+}

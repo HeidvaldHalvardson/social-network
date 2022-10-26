@@ -1,0 +1,12 @@
+.item {
+  padding: 10px;
+}
+
+.link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.active {
+  color: gold;
+}
