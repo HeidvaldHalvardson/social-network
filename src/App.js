@@ -1,5 +1,5 @@
 import React, {lazy, Suspense} from "react";
-import {BrowserRouter, Route, Routes, useParams} from "react-router-dom";
+import {HashRouter, Route, Routes, useParams} from "react-router-dom";
 import './App.css';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {connect, Provider} from "react-redux";
@@ -76,11 +76,11 @@ const AppContainer = compose(
 const MainApp = (props) => {
   return (
     <React.StrictMode>
-      <BrowserRouter>
+      <HashRouter>
         <Provider store={store}>
           <AppContainer/>
         </Provider>
-      </BrowserRouter>
+      </HashRouter>
     </React.StrictMode>
   )
 }
