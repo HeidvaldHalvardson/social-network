@@ -12,7 +12,7 @@ const validationSchema = Yup.object({
     .required('Email address is required'),
   password: Yup.string()
     .matches(/^[a-zA-Z0-9]+$/, 'Password can only contain Latin letters and numbers')
-    .required('Password is required')
+    .required('Password is required'),
 })
 
 const LoginForm = (props) => {
@@ -24,7 +24,7 @@ const LoginForm = (props) => {
 
   return (
     <Formik
-      initialValues={{ email: '', password: '', rememberMe: false }}
+      initialValues={{ email: '', password: '', rememberMe: false, captcha: '' }}
       validationSchema={validationSchema}
       onSubmit={submit}
     >
@@ -37,6 +37,11 @@ const LoginForm = (props) => {
             <Field as={CustomInput} type="password" name="password" placeholder="Password" errors={errors}/>
           </div>
           <div>
+            {props.captchaUrl &&
+            <div>
+              <img src={props.captchaUrl}  alt=""/>
+              <Field as={CustomInput} type="text" name="captcha" placeholder="" errors={errors} />
+            </div>}
             {status}
           </div>
           <label>
@@ -54,7 +59,7 @@ const LoginForm = (props) => {
 
 const Login = (props) => {
   const onSubmit = (formData, setStatus) => {
-    props.login(formData.email, formData.password, formData.rememberMe, setStatus)
+    props.login(formData.email, formData.password, formData.rememberMe, formData.captcha , setStatus)
   }
   if (props.isAuth) {
     return <Navigate to="/profile" />
@@ -62,12 +67,13 @@ const Login = (props) => {
   return (
     <>
       <h1>Login</h1>
-      <LoginForm onSubmit={onSubmit}/>
+      <LoginForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
     </>
   )
 }
 
 const mapStateToProps = (state) => ({
+  captchaUrl: state.auth.captchaUrl,
   isAuth: state.auth.isAuth
 })
 

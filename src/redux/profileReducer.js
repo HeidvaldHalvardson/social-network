@@ -63,7 +63,7 @@ export const addPost = (newPostText) => ({type: ADD_POST, newPostText});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const setStatus = (status) => ({type: SET_STATUS, status});
 export const deletePost = (postId) => ({type: DELETE_POST, postId});
-export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos})
+export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
 
 export const getUserProfile = (userId) => async (dispatch) => {
   const response = await profileAPI.getProfile(userId)
@@ -90,6 +90,17 @@ export const savePhoto = (file) => async (dispatch) => {
 
   if (response.data.resultCode === 0) {
     dispatch(savePhotoSuccess(response.data.data.photos))
+  }
+};
+
+export const saveProfile = (profile, setStatus) => async (dispatch, getState) => {
+  const userId = getState().auth.userId
+  const response = await profileAPI.saveProfile(profile)
+  if (response.data.resultCode === 0) {
+    dispatch(getUserProfile(userId))
+  } else {
+    setStatus(response.data.messages)
+    return Promise.reject(response.data.messages)
   }
 };
 

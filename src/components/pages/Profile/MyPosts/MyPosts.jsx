@@ -44,7 +44,7 @@ const MyPosts = React.memo((props) => {
   const postElement =
     [...props.postData]
       .reverse()
-      .map(item => <Post>{item.message}</Post>)
+      .map(item => <Post key={item.id}>{item.message}</Post>)
 
   return (
     <>
